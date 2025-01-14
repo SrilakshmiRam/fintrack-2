@@ -17,11 +17,10 @@ const AddTransaction = () => {
   const [expenseData, setExpenseData] = useState(expenses);
   const [userName, setUsername] = useState('');
   const [income, setIncome] = useState('');
-  const { addTransaction, transactions } = useContext(Context);
+  const { addTransaction } = useContext(Context);
 
   const navigate=useNavigate()
 
-  console.log(transactions);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -76,8 +75,8 @@ const AddTransaction = () => {
               <label className='category'>{expense.category}:</label>
               <input
                 type="number"
-                value={expense.amount}
-                onChange={(e) => handleAmountChange(index, parseFloat(e.target.value))}
+                value={isNaN(expense.amount) ? '' : expense.amount}
+                onChange={(e) => handleAmountChange(index, parseInt(e.target.value))}
                 className='input-amount'
                 required
               />
